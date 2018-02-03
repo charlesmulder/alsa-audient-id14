@@ -26,5 +26,6 @@
 
 ## Resources
 
+* [Official Audient iD14 documents](https://support.audient.com/hc/en-us/categories/200388355-iD14)
 * [A User's Guide to ALSA](https://www.linuxjournal.com/node/8234/print)
 
