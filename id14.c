@@ -22,6 +22,20 @@ MODULE_DEVICE_TABLE (usb, id14_table);
 static int id14_probe(struct usb_interface *interface, const struct usb_device_id *id) 
 {
     printk(KERN_INFO "Audient iD14 (%04X:%04X) plugged in\n", id->idVendor, id->idProduct);
+	struct usb_id14 *dev = NULL;
+	struct usb_host_interface *iface_desc;
+	struct usb_endpoint_descriptor *endpoint;
+	size_t buffer_size;
+	int i;
+	int retval = -ENOMEM;
+
+    pr_info("Audient iD14 probe function called");
+    pr_info("Audient iD14 vendor id is: %u", id->idVendor); // 9992
+    pr_info("Audient iD14 product id is: %u", id->idProduct); // 2
+    pr_info("Audient iD14 device class: %u", id->bDeviceClass); // 0
+    pr_info("Audient iD14 interface num_altsetting is: %u", interface->num_altsetting); // 1
+
+	iface_desc = interface->cur_altsetting;
     return 0;
 }
 
