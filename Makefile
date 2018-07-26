@@ -25,8 +25,11 @@ clean:
 
 else
     # called from kernel build system: just declare what our modules are
-    obj-m := hello.o hellop.o seq.o jit.o jiq.o sleepy.o complete.o \
-             silly.o faulty.o kdatasize.o kdataalign.o
+	# to multiple files
+    #obj-m := hello.o hellop.o seq.o jit.o jiq.o sleepy.o complete.o \
+    #         silly.o faulty.o kdatasize.o kdataalign.o
+	# to specify a single file
+    obj-m += id14.o  
 endif
 
 
