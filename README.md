@@ -22,6 +22,7 @@ Please see ~/Products/cm/linux-stable/Documentation/development-process/4.Coding
 
 * [Updated LDD3 examples](https://github.com/martinezjavier/ldd3)
 * [How to: USB pen driver for Linux](https://opensourceforu.com/2011/10/usb-drivers-in-linux-1/)
+* [Reverse engineering a USB sound card](http://kicherer.org/joomla/index.php/en/blog/38-reverse-engineering-a-usb-sound-card-with-midi-interface-for-linux)
 
 
 
