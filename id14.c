@@ -19,18 +19,49 @@ static struct usb_device_id id14_table [] = {
 };
 MODULE_DEVICE_TABLE (usb, id14_table);
 
-MODULE_LICENSE("GPL");
-
-static int id14_init(void)
+static int id14_probe(struct usb_interface *interface, const struct usb_device_id *id) 
 {
-    printk(KERN_ALERT "Hello, world\n");
+    printk(KERN_INFO "Audient iD14 (%04X:%04X) plugged in\n", id->idVendor, id->idProduct);
     return 0;
 }
 
-static void id14_exit(void)
+static void id14_disconnect(struct usb_interface *interface) 
 {
-    printk(KERN_ALERT "Goodbye, cruel world\n");
+    printk(KERN_INFO "Audient iD14 unplugged\n");
+}
+
+static struct usb_driver id14_driver = {
+    .name = "id14",
+    .id_table = id14_table,
+    .probe = id14_probe,
+    .disconnect = id14_disconnect
+};
+
+/**
+ * Returns 0 on success
+ */
+static int __init id14_init(void)
+{
+    int result;
+
+    /* register this driver with the USB subsystem */
+    result = usb_register(&id14_driver);
+    if (result)
+        printk(KERN_ERR "Audient iD14 USB registration failed, return code %d\n", result);
+
+    printk(KERN_INFO "Audient iD14 has been registered with the USB subsystem\n");
+    return result;
+}
+
+static void __exit id14_exit(void) 
+{
+    printk(KERN_INFO "Audient iD14 has been deregisterd\n");
+    usb_deregister(&id14_driver);
 }
 
 module_init(id14_init);
 module_exit(id14_exit);
+
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("charlesmulder.net");
+MODULE_DESCRIPTION("Audient iD14 ALSA driver");
