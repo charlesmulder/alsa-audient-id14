@@ -42,7 +42,7 @@ struct usb_id14 {
 static int id14_probe(struct usb_interface *interface, const struct usb_device_id *id) 
 {
 	struct usb_id14 *dev = NULL;
-	struct usb_host_interface *iface_desc;
+	struct usb_host_interface *host_interface;
     struct usb_host_endpoint *endpoint;
 	struct usb_endpoint_descriptor endpoint_desc;
     struct usb_device *usb_dev = interface_to_usbdev(interface);
@@ -50,32 +50,59 @@ static int id14_probe(struct usb_interface *interface, const struct usb_device_i
 
     //struct usb_host_config *config;
 	size_t buffer_size;
-	int i;
+	int i, c;
 	int retval = -ENOMEM;
     int result;
 
+    //usb_driver_set_configuration(&usb_dev, 0); // hangs the pc
     //mutex_lock(&devices_mutex);
-    usb_get_dev(usb_dev);
+    usb_dev = usb_get_dev(usb_dev); // increment the refcount, this needs to be stored in our structure, so it can be let go in disconnect function
 
     printk(KERN_INFO "Audient iD14 (%04X:%04X) plugged in\n", id->idVendor, id->idProduct);
     pr_info("Audient iD14 probe function called");
     pr_info("Audient iD14 vendor id is: %u", id->idVendor); // 9992
     pr_info("Audient iD14 product id is: %u", id->idProduct); // 2
     pr_info("Audient iD14 device class: %u", id->bDeviceClass); // 0
-    pr_info("Audient iD14 interface num_altsetting is: %u", interface->num_altsetting); // 1
-	//iface_desc = interface->cur_altsetting; // 0
+    pr_info("Audient iD14 interface num_altsetting is: %u", interface->num_altsetting); // 1 (I checked, only a single alt_setting)
+    pr_info("Audient iD14 interface cur_altsetting is: %u", interface->cur_altsetting); // struct usb_host_interface *
+
+    pr_info("usb host interface");
+    pr_info("  current alt setting");
+	host_interface = interface->cur_altsetting; // struct usb_host_interface *
+    pr_info("    host interface number of endpoints %u", host_interface->desc.bNumEndpoints); // 0
 
     pr_info("device number of configurations: %u", usb_dev->descriptor.bNumConfigurations); // 2
     pr_info("device class: %u", usb_dev->descriptor.bDeviceClass); // 239 = misc
     pr_info("device sub class: %u", usb_dev->descriptor.bDeviceSubClass); // 2
     pr_info("device speed: %s", usb_speed_string(usb_dev->speed)); // high-speed
     pr_info("device state: %s", usb_state_string(usb_dev->state)); // configured
-    pr_info("device number of interfaces: %u", usb_dev->actconfig->desc.bNumInterfaces); // 5
-    pr_info("device config value: %u", usb_dev->actconfig->desc.bConfigurationValue);
 
-    // printing out interfaces for active config
+    pr_info("device active configuration");
+    pr_info("device active configuration number of interfaces: %u", usb_dev->actconfig->desc.bNumInterfaces); // 5
+    pr_info("device active configuration value: %u", usb_dev->actconfig->desc.bConfigurationValue); // 1
+
+    pr_info("iterating through %u configurations", usb_dev->descriptor.bNumConfigurations);
+    for(c = 0; c < usb_dev->descriptor.bNumConfigurations; ++c) {
+        pr_info("configuration %u", c);
+        pr_info("iterating through %u interfaces", usb_dev->config[c].desc.bNumInterfaces);
+        for(i = 0; i < usb_dev->config[c].desc.bNumInterfaces; ++i) {
+            // TODO: does interface have multiple settings?
+            pr_info("interface %u", i);
+            if(usb_dev->config[c].interface[i]) {
+                pr_info("interface number of alt settings: %u", usb_dev->config[c].interface[i]->num_altsetting);
+                pr_info("interface current alt setting: %s", usb_dev->config[c].interface[i]->cur_altsetting->string);
+                pr_info("interface number of endpoints: %u", usb_dev->config[c].interface[i]->cur_altsetting->desc.bNumEndpoints);
+                pr_info("interface class: %u", usb_dev->config[c].interface[i]->cur_altsetting->desc.bInterfaceClass);
+                pr_info("interface subclass: %u", usb_dev->config[c].interface[i]->cur_altsetting->desc.bInterfaceSubClass);
+                pr_info("interface number: %u", usb_dev->config[c].interface[i]->cur_altsetting->desc.bInterfaceNumber);
+                pr_info("interface alternate setting: %u", usb_dev->config[c].interface[i]->cur_altsetting->desc.bAlternateSetting);
+            }
+        }
+    }
+
+    pr_info("iterating through interfaces for active config");
     for(i = 0; i < usb_dev->actconfig->desc.bNumInterfaces; ++i) {
-        pr_info("i is %u", i);
+        pr_info("interface %u", i);
         pr_info("interface number of alt settings: %u", usb_dev->actconfig->interface[i]->num_altsetting);
         pr_info("interface current alt setting: %s", usb_dev->actconfig->interface[i]->cur_altsetting->string);
         pr_info("interface number of endpoints: %u", usb_dev->actconfig->interface[i]->cur_altsetting->desc.bNumEndpoints);
@@ -89,6 +116,7 @@ static int id14_probe(struct usb_interface *interface, const struct usb_device_i
     //USB_ENDPOINT_XFER_{CONTROL, ISOC, BULK, INT}
     return 0;
 }
+
 
 /**
  * clean any private data that has been allocated 
