@@ -23,9 +23,9 @@ KERNELDIR=~/Products/cm/linux-stable/ make
 # tail kernel output
 sudo dmesg -w
 # insert module into kernel
-sudo insmod id14.ko 
+sudo insmod snd-usb-id14.ko 
 # remove module
-sudo rmmod id14
+sudo rmmod snd-usb-id14
 ```
 
 ## Resources

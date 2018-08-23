@@ -1,0 +1,164 @@
+device: 
+  class: "239 (Miscellaneous)"
+  config_value: 1
+  number_of_configurations: 2
+  number_of_interfaces: 5
+  speed: high-speed
+  state: configured
+  sub_class: 2
+  configurations: 
+    - 
+      configuration: 0
+      number_of_interfaces: 5
+      interfaces: 
+        - 
+          interface: 0
+          alternate_setting: 0
+          class: "1 (audio interface)"
+          current_alt_setting: "Audient iD14"
+          number: 0
+          number_of_endpoints: 0
+          subclass: "1 (audio control)"
+          number_of_alt_settings: 1
+          alt_settings:
+            -
+              alt_setting: 0 
+              number_of_endpoints: 0
+        - 
+          interface: 1
+          alternate_setting: 0
+          class: "1 (audio interface)"
+          current_alt_setting: "Audient iD14"
+          number: 1
+          number_of_endpoints: 0
+          subclass: "2 (audio streaming)"
+          number_of_alt_settings: 3
+          alt_settings: 
+            - 
+              alt_setting: 0
+              number_of_endpoints: 0
+            -
+              alt_setting: 1
+              number_of_endpoints: 2
+              endpoints:
+                -
+                  endpoint: 0
+                  enabled: 0
+                  streams: 0
+                  length: 7
+                  descriptor_type: 5
+                  address: 1
+                  attributes: 5
+                  max_packet_size: 208
+                  interval: 1
+                  refresh: 0
+                  synch_address: 0
+                -
+                  endpoint: 1
+                  enabled: 0
+                  streams: 0
+                  length: 7
+                  descriptor_type: 5
+                  address: 129
+                  attributes: 17
+                  max_packet_size: 4
+                  interval: 4
+                  refresh: 0
+                  synch_address: 0
+            -
+              alt_setting: 2
+              number_of_endpoints: 2
+              endpoints:
+                -
+                  endpoint: 0
+                  enabled: 0
+                  streams: 0
+                  length: 7
+                  descriptor_type: 5
+                  address: 1
+                  attributes: 5
+                  max_packet_size: 104
+                  interval: 1
+                  refresh: 0
+                  synch_address: 0
+                -
+                  endpoint: 1
+                  enabled: 0
+                  streams: 0
+                  length: 7
+                  descriptor_type: 5
+                  address: 129
+                  attributes: 17
+                  max_packet_size: 4
+                  interval: 4
+                  refresh: 0
+                  synch_address: 0
+        - 
+          interface: 2
+          alternate_setting: 0
+          class: "1 (audio interface)"
+          current_alt_setting: "Audient iD14"
+          number: 2
+          number_of_endpoints: 0
+          subclass: "2 (audio streaming)"
+          number_of_alt_settings: 2
+          alt_settings:
+            - 
+              alt_setting: 0
+              number_of_endpoints: 0
+            -
+              alt_setting: 1
+              number_of_endpoints: 1
+              endpoints: 
+                - 
+                  endpoint: 0
+                  enabled: 0
+                  streams: 0
+                  length: 7
+                  descriptor_type: 5
+                  address: 130
+                  attributes: 5
+                  max_packet_size: 520
+                  interval: 1
+                  refresh: 0
+                  synch_address: 0
+        - 
+          interface: 3
+          alternate_setting: 0
+          class: "254 (application specific interface)"
+          current_alt_setting: "Audient DFU (Feature Unit)"
+          number: 3
+          number_of_endpoints: 0
+          subclass: "1 (audio control)"
+          number_of_alt_settings: 1
+          alt_settings:
+            - alt_setting: 0
+              number_of_endpoints: 0
+        - 
+          interface: 4
+          alternate_setting: 0
+          class: "3 (human interface device interface)"
+          current_alt_setting: (null)
+          number: 4
+          number_of_endpoints: 1
+          subclass: "0 (undefined)"
+          number_of_alt_settings: 1
+          alt_settings: 
+            - 
+              alt_setting: 0
+              number_of_endpoints: 1
+              endpoints: 
+                - 
+                  endpoint: 0
+                  enabled: 1
+                  streams: 0
+                  length: 7
+                  descriptor_type: 5
+                  address: 132
+                  attributes: 3
+                  max_packet_size: 64
+                  interval: 8
+                  refresh: 0
+                  synch_address: 0
+    - 
+      configuration: 1
