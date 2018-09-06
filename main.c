@@ -14,6 +14,13 @@
 #include "logger.h"
 //#include <alsa/asoundlib.h> 
 
+/**
+ * % In the skeleton driver, we determine what end points are marked as bulk-in and bulk-out. We create buffers to hold the data that will be sent and received from the device, and a USB urb to write data to the device is initialized.
+ *
+ * % continue from page 903 of ldd3
+ *
+ */
+
 /* Define these values to match your devices */
 #define ID14_VENDOR_ID	0x2708 //0xfff0
 #define ID14_PRODUCT_ID	0x0002 //0xfff0
@@ -60,6 +67,9 @@ static int id14_probe(struct usb_interface *interface, const struct usb_device_i
     usb_dev = usb_get_dev(usb_dev); // increment the refcount, this needs to be stored in our structure, so it can be let go in disconnect function
 
     printk(KERN_INFO "Audient iD14 (%04X:%04X) plugged in\n", id->idVendor, id->idProduct);
+	pr_info("interface class: %u", interface->cur_altsetting->desc.bInterfaceClass);
+	pr_info("interface subclass: %u", interface->cur_altsetting->desc.bInterfaceSubClass);
+	pr_info("interface number: %u", interface->cur_altsetting->desc.bInterfaceNumber);
     pr_info("Audient iD14 probe function called");
     pr_info("Audient iD14 vendor id is: %u", id->idVendor); // 9992
     pr_info("Audient iD14 product id is: %u", id->idProduct); // 2
@@ -106,7 +116,7 @@ static int id14_probe(struct usb_interface *interface, const struct usb_device_i
                         for(e = 0; e < host_interface->desc.bNumEndpoints; ++e) {
                             pr_info("configuration %u interface %u alt setting %u endpoint %u", c, i, s, e);
                             endpoint = &host_interface->endpoint[e]; // struct usb_host_endpoint
-                            pr_info("endpoint hallo");
+                            pr_info("endpoint not hallo");
                             if(endpoint) {
                                 print_endpoint(endpoint);
                             }
@@ -117,19 +127,6 @@ static int id14_probe(struct usb_interface *interface, const struct usb_device_i
         }
     }
 
-    /*
-    pr_info("iterating through interfaces for active config");
-    for(i = 0; i < usb_dev->actconfig->desc.bNumInterfaces; ++i) {
-        pr_info("interface %u", i);
-        pr_info("interface number of alt settings: %u", usb_dev->actconfig->interface[i]->num_altsetting);
-        pr_info("interface current alt setting: %s", usb_dev->actconfig->interface[i]->cur_altsetting->string);
-        pr_info("interface number of endpoints: %u", usb_dev->actconfig->interface[i]->cur_altsetting->desc.bNumEndpoints);
-        pr_info("interface class: %u", usb_dev->actconfig->interface[i]->cur_altsetting->desc.bInterfaceClass);
-        pr_info("interface subclass: %u", usb_dev->actconfig->interface[i]->cur_altsetting->desc.bInterfaceSubClass);
-        pr_info("interface number: %u", usb_dev->actconfig->interface[i]->cur_altsetting->desc.bInterfaceNumber);
-        pr_info("interface alternate setting: %u", usb_dev->actconfig->interface[i]->cur_altsetting->desc.bAlternateSetting);
-    }
-    */
     //result = usb_set_interface(usb_dev, interface->cur_altsetting->desc.bInterfaceNumber, 0);
     //mutex_unlock(&devices_mutex);
     //USB_ENDPOINT_XFER_{CONTROL, ISOC, BULK, INT}

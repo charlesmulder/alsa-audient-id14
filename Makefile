@@ -24,14 +24,8 @@ clean:
 .PHONY: modules modules_install clean
 
 else
-	usb-snd-id14-objs := logger.o id14.o
-    # called from kernel build system: just declare what our modules are
-	# to multiple files
-	obj-m := usb-snd-id14.o
-    #obj-m := logger.o id14.o 
-    #         silly.o faulty.o kdatasize.o kdataalign.o
-	# to specify a single file
-    #obj-m += id14.o 
+	obj-m += id14.o
+	id14-y := logger.o main.o 
 endif
 
 

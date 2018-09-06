@@ -1,3 +1,25 @@
+T:  Bus=02 Lev=02 Prnt=02 Port=03 Cnt=01 Dev#= 12 Spd=480  MxCh= 0
+D:  Ver= 2.00 Cls=ef(misc ) Sub=02 Prot=01 MxPS=64 #Cfgs=  2
+P:  Vendor=2708 ProdID=0002 Rev= 0.27
+S:  Manufacturer=Audient
+S:  Product=Audient iD14
+C:* #Ifs= 5 Cfg#= 1 Atr=80 MxPwr=500mA
+A:  FirstIf#= 0 IfCount= 3 Cls=01(audio) Sub=00 Prot=20
+I:* If#= 0 Alt= 0 #EPs= 0 Cls=01(audio) Sub=01 Prot=20 Driver=snd-usb-audio
+I:* If#= 1 Alt= 0 #EPs= 0 Cls=01(audio) Sub=02 Prot=20 Driver=snd-usb-audio
+I:  If#= 1 Alt= 1 #EPs= 2 Cls=01(audio) Sub=02 Prot=20 Driver=snd-usb-audio
+E:  Ad=01(O) Atr=05(Isoc) MxPS= 208 Ivl=125us
+E:  Ad=81(I) Atr=11(Isoc) MxPS=   4 Ivl=1ms
+I:  If#= 1 Alt= 2 #EPs= 2 Cls=01(audio) Sub=02 Prot=20 Driver=snd-usb-audio
+E:  Ad=01(O) Atr=05(Isoc) MxPS= 104 Ivl=125us
+E:  Ad=81(I) Atr=11(Isoc) MxPS=   4 Ivl=1ms
+I:* If#= 2 Alt= 0 #EPs= 0 Cls=01(audio) Sub=02 Prot=20 Driver=snd-usb-audio
+I:  If#= 2 Alt= 1 #EPs= 1 Cls=01(audio) Sub=02 Prot=20 Driver=snd-usb-audio
+E:  Ad=82(I) Atr=05(Isoc) MxPS= 520 Ivl=125us
+I:* If#= 3 Alt= 0 #EPs= 0 Cls=fe(app. ) Sub=01 Prot=01 Driver=id14
+I:* If#= 4 Alt= 0 #EPs= 1 Cls=03(HID  ) Sub=00 Prot=00 Driver=usbhid
+E:  Ad=84(I) Atr=03(Int.) MxPS=  64 Ivl=16ms
+
 device: 
   class: "239 (Miscellaneous)"
   config_value: 1
@@ -41,8 +63,13 @@ device:
               alt_setting: 1
               number_of_endpoints: 2
               endpoints:
+E:  Ad=01(O) Atr=05(Isoc) MxPS= 208 Ivl=125us
+E:  Ad=81(I) Atr=11(Isoc) MxPS=   4 Ivl=1ms
                 -
                   endpoint: 0
+                  type: "isochronous"
+                  direction: "out"
+                  address: 0x01
                   enabled: 0
                   streams: 0
                   length: 7
@@ -50,11 +77,15 @@ device:
                   address: 1
                   attributes: 5
                   max_packet_size: 208
-                  interval: 1
+                  interval: 1 
+                  ivl: "125us"
                   refresh: 0
                   synch_address: 0
                 -
                   endpoint: 1
+                  type: "isochronous"
+                  direction: "in"
+                  address: 0x81
                   enabled: 0
                   streams: 0
                   length: 7
@@ -63,6 +94,7 @@ device:
                   attributes: 17
                   max_packet_size: 4
                   interval: 4
+                  ivl: "1ms"
                   refresh: 0
                   synch_address: 0
             -

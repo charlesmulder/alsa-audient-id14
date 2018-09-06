@@ -18,14 +18,16 @@ Please see ~/Products/cm/linux-stable/Documentation/development-process/4.Coding
 ## Quickstart
 
 ```bash
+# remove the default loaded module
+sudo rmmod snd-usb-audio
 # build the module using the kernel build system
 KERNELDIR=~/Products/cm/linux-stable/ make 
 # tail kernel output
 sudo dmesg -w
 # insert module into kernel
-sudo insmod snd-usb-id14.ko 
+sudo insmod id14.ko 
 # remove module
-sudo rmmod snd-usb-id14
+sudo rmmod id14
 ```
 
 ## Resources
