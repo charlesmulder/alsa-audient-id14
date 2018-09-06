@@ -18,7 +18,7 @@ Please see ~/Products/cm/linux-stable/Documentation/development-process/4.Coding
 ## Quickstart
 
 ```bash
-# remove the default loaded module
+# NB: remove the default loaded module
 sudo rmmod snd-usb-audio
 # build the module using the kernel build system
 KERNELDIR=~/Products/cm/linux-stable/ make 
