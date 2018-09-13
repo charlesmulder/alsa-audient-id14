@@ -1,8 +1,18 @@
 #include <linux/printk.h>
 #include <linux/usb.h>
+#include <sound/core.h>
 #include "logger.h"
 
+void print_card(struct snd_card *card) {
+    pr_info("printing card"); 
+    pr_info("card number %d", card->number);
+    pr_info("card id %s", card->id);
+    pr_info("card driver %s", card->driver);
+    pr_info("card shortname %s", card->shortname);
+}
+
 void print_device(struct usb_device *usb_dev) {
+    pr_info("printing device");
 
 	struct usb_host_interface *host_interface;
     struct usb_host_endpoint *endpoint;
