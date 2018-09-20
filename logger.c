@@ -12,11 +12,12 @@ void print_card(struct snd_card *card) {
 }
 
 void print_device(struct usb_device *usb_dev) {
-    pr_info("printing device");
 
 	struct usb_host_interface *host_interface;
     struct usb_host_endpoint *endpoint;
 	int c, i, s, e; // (c)onfiguration, (i)nterface, alt (s)etting, (e)ndpoint
+
+    pr_info("printing device");
 
     pr_info("device number of configurations: %u", usb_dev->descriptor.bNumConfigurations); // 2
     pr_info("device class: %u", usb_dev->descriptor.bDeviceClass); // 239 = misc
