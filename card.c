@@ -29,6 +29,10 @@ static bool enable[SNDRV_CARDS] = SNDRV_DEFAULT_ENABLE_PNP;/* Enable this card *
 static struct snd_id14_chip *chips[SNDRV_CARDS] = SNDRV_DEFAULT_PTR;
 static struct usb_device *devices[SNDRV_CARDS] = SNDRV_DEFAULT_PTR;
 
+/**
+ * Since our module only supports a single card, it would make more sense to use module_param() instead of module_param_array()
+ * https://www.kernel.org/doc/html/v4.17/sound/kernel-api/writing-an-alsa-driver.html#module-parameters
+ */
 module_param_array(index, int, NULL, 0444);
 MODULE_PARM_DESC(index, "Index value for the iD14 sound device");
 module_param_array(id, charp, NULL, 0444);
