@@ -1,6 +1,3 @@
-#include <linux/printk.h>
-#include <linux/usb.h>
-#include <sound/core.h>
 #include "logger.h"
 
 void print_card(struct snd_card *card) {

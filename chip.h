@@ -1,10 +1,7 @@
 #ifndef ID14_CHIP_H
 #define ID14_CHIP_H
 
-#include <linux/usb.h>
-#include <sound/core.h>
-
-struct pcm_runtime;
+#include "common.h"
 
 struct snd_id14_chip {
     struct usb_device *dev;

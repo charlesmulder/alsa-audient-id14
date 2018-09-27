@@ -25,7 +25,7 @@ clean:
 
 else
 	obj-m += id14.o
-	id14-y := logger.o card.o 
+	id14-y := logger.o chip.o 
 endif
 
 

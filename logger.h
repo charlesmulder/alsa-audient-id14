@@ -1,6 +1,9 @@
 #ifndef USB_ID14_LOGGER
 #define USB_ID14_LOGGER
 
+#include "common.h"
+#include <linux/printk.h>
+
 void print_endpoint(struct usb_host_endpoint *endpoint);
 
 void print_device(struct usb_device *usb_dev);

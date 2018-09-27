@@ -63,38 +63,36 @@ device:
               alt_setting: 1
               number_of_endpoints: 2
               endpoints:
-E:  Ad=01(O) Atr=05(Isoc) MxPS= 208 Ivl=125us
-E:  Ad=81(I) Atr=11(Isoc) MxPS=   4 Ivl=1ms
                 -
+                  id14: "speakers?"
                   endpoint: 0
                   type: "isochronous"
                   direction: "out"
-                  address: 0x01
+                  address_hex: 0x01
                   enabled: 0
                   streams: 0
                   length: 7
                   descriptor_type: 5
-                  address: 1
+                  address_dec: 1
                   attributes: 5
                   max_packet_size: 208
-                  interval: 1 
-                  ivl: "125us"
+                  interval: "125us (high speed)"
                   refresh: 0
                   synch_address: 0
                 -
+                  id14: "speakers feedback?"
                   endpoint: 1
                   type: "isochronous"
                   direction: "in"
-                  address: 0x81
+                  address_hex: 0x81
                   enabled: 0
                   streams: 0
                   length: 7
                   descriptor_type: 5
-                  address: 129
+                  address_dec: 129
                   attributes: 17
                   max_packet_size: 4
-                  interval: 4
-                  ivl: "1ms"
+                  interval: "1ms (full speed)"
                   refresh: 0
                   synch_address: 0
             -
@@ -102,27 +100,35 @@ E:  Ad=81(I) Atr=11(Isoc) MxPS=   4 Ivl=1ms
               number_of_endpoints: 2
               endpoints:
                 -
+                  id14: "headphones?"
                   endpoint: 0
+                  type: "isochronous"
+                  direction: "out"
+                  address_hex: 0x01
                   enabled: 0
                   streams: 0
                   length: 7
                   descriptor_type: 5
-                  address: 1
+                  address_dec: 1
                   attributes: 5
                   max_packet_size: 104
-                  interval: 1
+                  interval: "125us (high speed)"
                   refresh: 0
                   synch_address: 0
                 -
+                  id14: "headphones feedback?"
                   endpoint: 1
+                  type: "isochronous"
+                  direction: "in"
+                  address_hex: 0x81
                   enabled: 0
                   streams: 0
                   length: 7
                   descriptor_type: 5
-                  address: 129
+                  address_dec: 129
                   attributes: 17
                   max_packet_size: 4
-                  interval: 4
+                  interval: "1ms (full speed)"
                   refresh: 0
                   synch_address: 0
         - 
@@ -143,15 +149,19 @@ E:  Ad=81(I) Atr=11(Isoc) MxPS=   4 Ivl=1ms
               number_of_endpoints: 1
               endpoints: 
                 - 
+                  id14: "DI or optical?"
                   endpoint: 0
+                  type: "isochronous"
+                  direction: "in"
+                  address_hex: 0x82
                   enabled: 0
                   streams: 0
                   length: 7
                   descriptor_type: 5
-                  address: 130
+                  address_dec: 130
                   attributes: 5
                   max_packet_size: 520
-                  interval: 1
+                  interval: "125us (high speed)"
                   refresh: 0
                   synch_address: 0
         - 
@@ -181,15 +191,19 @@ E:  Ad=81(I) Atr=11(Isoc) MxPS=   4 Ivl=1ms
               number_of_endpoints: 1
               endpoints: 
                 - 
+                  id14: "hardware controls"
                   endpoint: 0
+                  type: "interrupt"
+                  direction: "in"
+                  address_hex: 0x84
                   enabled: 1
                   streams: 0
                   length: 7
                   descriptor_type: 5
-                  address: 132
+                  address_dec: 132
                   attributes: 3
                   max_packet_size: 64
-                  interval: 8
+                  interval: "16ms"
                   refresh: 0
                   synch_address: 0
     - 
