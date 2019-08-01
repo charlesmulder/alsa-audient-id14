@@ -1,5 +1,11 @@
 # WIP: Linux ALSA module for Audient iD14
 
+This repo served as an experimentation area whilst writing a paper for a post grad in music technology. The paper is entitled [An overview of the technologies involved in a Linux USB audio device driver](https://www.overleaf.com/read/vnztffzgfcpv).
+
+I ran out of time, so never managed to complete the driver. I'd like to return to it one day. An electrical engineer friend of mine suggested we open the device to determine the manufacturer of the PC board. Apparently, the component manufacturers might have specs and documentation, which will make the process easier. 
+
+If anyone else is keen to help, please let me know.
+
 ## To Do
 
 ### Output
